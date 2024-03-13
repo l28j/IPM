@@ -62,14 +62,26 @@ function draw()
     fill(color(255,255,255));
     textAlign(LEFT);
     text("Trial " + (current_trial + 1) + " of " + trials.length, 50, 20);
-        
+      
     // Draw all targets
-	for (var i = 0; i < legendas.getRowCount(); i++) targets[i].draw();
+	for (var i = 0; i < legendas.getRowCount(); i++) {
+      if (i <= 26) { targets[i].draw(155, 0, 0); }
+      else if (i <= 37) { targets[i].draw(255, 165, 0); }
+      else if (i <= 40) { targets[i].draw(200, 200, 0); }
+      else if (i <= 49) { targets[i].draw(0, 155, 0); }
+      else if (i <= 50) { targets[i].draw(0, 100, 0); }
+      else if (i <= 51) { targets[i].draw(0, 0, 180); }
+      else if (i <= 55) { targets[i].draw(90, 90, 230); }
+      else if (i <= 68) { targets[i].draw(126, 90, 155); }
+      else if (i <= 78) { targets[i].draw(238, 130, 238); }
+      else if (i <= 79) { targets[i].draw(150, 120, 210); }
+
+    } 
     
     // Draws the target label to be selected in the current trial. We include 
     // a black rectangle behind the trial label for optimal contrast in case 
     // you change the background colour of the sketch (DO NOT CHANGE THESE!)
-    fill(color(0,0,0));
+    fill(color(0,0,0));  
     rect(0, height - 40, width, 40);
  
     textFont("Arial", 20); 
@@ -155,6 +167,7 @@ function mousePressed()
         current_trial++;              // Move on to the next trial/target
         break;
       }
+
     }
     
     // Check if the user has completed all trials
@@ -200,27 +213,41 @@ function createTargets(target_size, horizontal_gap, vertical_gap)
 {
   // Define the margins between targets by dividing the white space 
   // for the number of targets minus one
-  h_margin = horizontal_gap / (GRID_COLUMNS -1);
+  h_margin = horizontal_gap / (GRID_COLUMNS*6/5 -1);
   v_margin = vertical_gap / (GRID_ROWS - 1);
   
+  var XsYs = [];
+  var labelsIds = [];
+  
   // Set targets in a 8 x 10 grid
-  for (var r = 0; r < GRID_ROWS; r++)
-  {
-    for (var c = 0; c < GRID_COLUMNS; c++)
-    {
-      let target_x = 40 + (h_margin + target_size) * c + target_size/2;        // give it some margin from the left border
+  for (var r = 0; r < GRID_ROWS; r++) {
+    
+    for (var c = 0; c < GRID_COLUMNS; c++) {
+      
+      let target_x = (h_margin + target_size) * c + target_size/2; // give it some margin from the left border
       let target_y = (v_margin + target_size) * r + target_size/2;
       
       // Find the appropriate label and ID for this target
       let legendas_index = c + GRID_COLUMNS * r;
       let target_id = legendas.getNum(legendas_index, 0);  
-      let target_label = legendas.getString(legendas_index, 1);   
+      let target_label = legendas.getString(legendas_index, 1); 
       
-      let target = new Target(target_x, target_y + 40, target_size, target_label, target_id);
-      targets.push(target);
+      labelsIds.push({label : target_label, id : target_id});
+      XsYs.push({x : target_x, y : target_y});
     }  
   }
+  
+  // Sort the array of labels and ids by alphabetical order of label
+  labelsIds.sort((a, b) => a.label.localeCompare(b.label));
+  
+  // Adds targets to the main target list
+  for (var i = 0; i < labelsIds.length; i++) {
+    let target = new Target(XsYs[i].x + target_size*1.5, XsYs[i].y + 70, target_size, labelsIds[i].label, labelsIds[i].id);
+    targets.push(target);
+  }
+
 }
+
 
 // Is invoked when the canvas is resized (e.g., when we go fullscreen)
 function windowResized() 
