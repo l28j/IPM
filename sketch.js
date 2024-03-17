@@ -70,14 +70,45 @@ function draw()
       else if (i <= 40) { targets[i].draw(200, 200, 0); }
       else if (i <= 49) { targets[i].draw(0, 155, 0); }
       else if (i <= 50) { targets[i].draw(0, 100, 0); }
-      else if (i <= 51) { targets[i].draw(0, 0, 180); }
+      else if (i <= 51) { targets[i].draw(0, 50, 230); }
       else if (i <= 55) { targets[i].draw(90, 90, 230); }
       else if (i <= 68) { targets[i].draw(126, 90, 155); }
-      else if (i <= 78) { targets[i].draw(238, 130, 238); }
+      else if (i <= 78) { targets[i].draw(200, 100, 200); }
       else if (i <= 79) { targets[i].draw(150, 120, 210); }
 
     } 
     
+    // Print Sections Informations
+    textFont("Arial", 30);
+    textStyle(BOLD);
+    fill(color(155,0,0));
+    textAlign(CENTER);
+    text("A", width/3, 59);
+    
+    fill(color(255, 165, 0));
+    text("E", width/4, width*0.271 -targets[1].width *0.5);
+    
+    fill(color(200, 200, 0));
+    text("H", width*0.72 +targets[1].width *1.5, 59);
+    
+    fill(color(0, 155, 0));
+    text("I", width/4 -targets[1].width *0.9, width*0.42 -targets[1].width *0.5);
+    
+    fill(color(0, 100, 0));
+    text("L", width*0.74 -targets[1].width *0.2, width*0.12+targets[1].width *0.3);
+    fill(color(0, 50, 230));
+    text("N", width*0.85 +targets[1].width*1.8, width*0.12+targets[1].width *0.3);
+    fill(color(90, 90, 230));
+    text("O", width*0.69+targets[1].width*2.78, width*0.2-targets[1].width*0.45);
+    
+    fill(color(126, 90, 155));
+    text("R", width*0.47+targets[1].width*2.9, width*0.271-targets[1].width*0.5);
+      
+    fill(color(238, 130, 238));
+    text("U", width*0.44+targets[1].width*3.3, width*0.42 -targets[1].width *0.5);
+    
+    fill(color(150, 120, 210));
+    text("Y", width*0.9+ targets[1].width*0.8, width*0.46 -targets[1].width *0.5);
     // Draws the target label to be selected in the current trial. We include 
     // a black rectangle behind the trial label for optimal contrast in case 
     // you change the background colour of the sketch (DO NOT CHANGE THESE!)
@@ -160,10 +191,13 @@ function mousePressed()
       // Check if the user clicked over one of the targets
       if (targets[i].clicked(mouseX, mouseY)) 
       {
+        // Highlight the target
+        targets[i].highlighted = true;
+        
         // Checks if it was the correct target
         if (targets[i].id === trials[current_trial] + 1) hits++;
         else misses++;
-        
+         
         current_trial++;              // Move on to the next trial/target
         break;
       }
@@ -196,7 +230,11 @@ function continueTest()
 {
   // Re-randomize the trial order
   randomizeTrials();
-  
+  for (var i = 0; i < legendas.getRowCount(); i++)
+    {
+        // Remove Highlight from the target
+        targets[i].highlighted = false;
+    }
   // Resets performance variables
   hits = 0;
   misses = 0;
@@ -213,16 +251,19 @@ function createTargets(target_size, horizontal_gap, vertical_gap)
 {
   // Define the margins between targets by dividing the white space 
   // for the number of targets minus one
-  h_margin = horizontal_gap / (GRID_COLUMNS*6/5 -1);
-  v_margin = vertical_gap / (GRID_ROWS - 1);
+  h_margin = (horizontal_gap / (GRID_COLUMNS*6/5 -1) )*0.05;
+  v_margin = vertical_gap / (GRID_ROWS - 1)/3;
   
   var XsYs = [];
   var labelsIds = [];
   
+  var r=0;
+  var c=0;
+
   // Set targets in a 8 x 10 grid
-  for (var r = 0; r < GRID_ROWS; r++) {
+  for (r = 0; r < GRID_ROWS; r++) {
     
-    for (var c = 0; c < GRID_COLUMNS; c++) {
+    for (c = 0; c < GRID_COLUMNS; c++) {
       
       let target_x = (h_margin + target_size) * c + target_size/2; // give it some margin from the left border
       let target_y = (v_margin + target_size) * r + target_size/2;
@@ -233,15 +274,158 @@ function createTargets(target_size, horizontal_gap, vertical_gap)
       let target_label = legendas.getString(legendas_index, 1); 
       
       labelsIds.push({label : target_label, id : target_id});
-      XsYs.push({x : target_x, y : target_y});
+      //XsYs.push({x : target_x, y : target_y});
+
     }  
   }
   
+   ///*
+   var i=0;
+  
+          for (r = 0; r < 3; r++) {
+
+              for ( c = 0; c < 9; c++) {
+              
+              //a
+                let target_x = (h_margin + target_size*1.3) * c + target_size/4; 
+                 
+                let target_y = (v_margin + target_size) * r + target_size;
+                
+                
+                if (i <= 26){XsYs.push({x : target_x, y : target_y});
+                            i++;}
+              
+              }
+            }
+            for (r = 0; r < 2; r++) {
+
+              for (c = 0; c < 6; c++) {
+              
+              //e
+                let target_x = (h_margin + target_size*1.3) * c + target_size/4; 
+                 
+                let target_y = (v_margin + target_size) * r + width*0.271;
+                
+                if (i <= 37){XsYs.push({x : target_x, y : target_y});
+                i++;}
+              
+              }
+            }
+                  for (r = 0; r < 1; r++) {
+
+                    for (c = 0; c < 4; c++) {
+
+              //h
+                      let target_x = (h_margin + target_size*1.3) * c + width*0.72; 
+
+                      let target_y = (v_margin + target_size) * r + target_size;
+                      
+                      if (i <= 40){XsYs.push({x : target_x, y : target_y});
+                i++;}
+              
+              }
+            }                 
+              for (r = 0; r < 2; r++) {
+
+                    for (c = 0; c < 5; c++) {
+
+            //i
+                      let target_x = (h_margin + target_size*1.3) * c + target_size/4; 
+
+                      let target_y = (v_margin + target_size) * r + width*0.42;
+                      
+                      if (i <= 49){XsYs.push({x : target_x, y : target_y});
+                      i++;}
+              
+              }
+            }
+          for ( r = 0; r < 1; r++) {
+
+                    for (c = 0; c < 5; c++) {
+
+              //l
+                      let target_x = (h_margin + target_size*1.3) * c +  width*0.74; 
+
+                      let target_y = (v_margin + target_size) * r + width*0.12;
+                      
+                      if (i <= 50){XsYs.push({x : target_x, y : target_y});
+                i++;}
+              
+              }
+            } 
+      for ( r = 0; r < 1; r++) {
+
+                    for ( c = 0; c < 5; c++) {
+            //n
+
+                      let target_x = (h_margin + target_size*1.3) * c + width*0.85; 
+
+                      let target_y = (v_margin + target_size) * r + width*0.12;
+                      
+                      if (i <= 51){XsYs.push({x : target_x, y : target_y});
+                i++;}
+              
+              }
+            }
+    for ( r = 0; r < 1; r++) {
+
+                    for ( c = 0; c < 7; c++) {
+
+              //o
+                      let target_x = (h_margin + target_size*1.3) * c + width*0.69; 
+
+                      let target_y = (v_margin + target_size) * r + width*0.2;
+                      
+                      if (i <= 55){XsYs.push({x : target_x, y : target_y});
+                i++;}
+              
+              }
+            } 
+            for ( r = 0; r < 2; r++) {
+
+                    for ( c = 0; c < 7; c++) {
+
+                //r
+                      let target_x = (h_margin + target_size*1.3) * c + width*0.47; 
+
+                      let target_y = (v_margin + target_size) * r + width*0.271;
+                      
+                      if (i <= 68){XsYs.push({x : target_x, y : target_y});
+                i++;}
+              
+              }
+            } 
+                 for (r = 0; r < 2; r++) {
+
+                    for ( c = 0; c < 5; c++) {
+              //u
+
+                      let target_x = (h_margin + target_size*1.3) * c + width*0.44; 
+
+                      let target_y = (v_margin + target_size) * r + width*0.42;
+                      
+                      if (i <= 78){XsYs.push({x : target_x, y : target_y});
+                i++;}
+              
+              }
+            } 
+                  //y
+                      let target_x = (h_margin + target_size*1.3) * 0 + width*0.9; 
+
+                      let target_y = (v_margin + target_size) * 0 + width*0.46;
+                      
+                      XsYs.push({x : target_x, y : target_y});
+             
+     
+  
+
+
+  //  */
   // Sort the array of labels and ids by alphabetical order of label
   labelsIds.sort((a, b) => a.label.localeCompare(b.label));
   
   // Adds targets to the main target list
-  for (var i = 0; i < labelsIds.length; i++) {
+  for (i = 0; i < labelsIds.length; i++) {
     let target = new Target(XsYs[i].x + target_size*1.5, XsYs[i].y + 70, target_size, labelsIds[i].label, labelsIds[i].id);
     targets.push(target);
   }
@@ -265,7 +449,7 @@ function windowResized()
     // Below we find out out white space we can have between 2 cm targets
     let screen_width   = display.width * 2.54;             // screen width
     let screen_height  = display.height * 2.54;            // screen height
-    let target_size    = 2;                                // sets the target size (will be converted to cm when passed to createTargets)
+    let target_size    =  2;                                // sets the target size (will be converted to cm when passed to createTargets)
     let horizontal_gap = screen_width - target_size * GRID_COLUMNS;// empty space in cm across the x-axis (based on 10 targets per row)
     let vertical_gap   = screen_height - target_size * GRID_ROWS;  // empty space in cm across the y-axis (based on 8 targets per column)
 

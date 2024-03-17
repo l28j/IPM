@@ -9,7 +9,7 @@ function drawUserIDScreen()
   background(color(0,0,0));                                          // sets background to black
   
   // Text prompt
-  main_text = createDiv("Insert your student number and display size");
+  main_text = createDiv("Insert your student number and display size and before starting ajust zoom");
   main_text.id('main_text');
   main_text.position(10, 10);
   
