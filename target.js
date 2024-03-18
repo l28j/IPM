@@ -43,7 +43,7 @@ class Target
     //circle(this.x, this.y, this.width);
     }
     // Draw label
-    textFont("Arial", width/1500 *16);
+    textFont("Arial", 16);
     textStyle(BOLD);
     fill(color(255,255,255));
     textAlign(CENTER);

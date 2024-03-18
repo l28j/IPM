@@ -77,38 +77,7 @@ function draw()
       else if (i <= 79) { targets[i].draw(150, 120, 210); }
 
     } 
-    
-    // Print Sections Informations
-    textFont("Arial", 30);
-    textStyle(BOLD);
-    fill(color(155,0,0));
-    textAlign(CENTER);
-    text("A", width/3, 59);
-    
-    fill(color(255, 165, 0));
-    text("E", width/4, width*0.271 -targets[1].width *0.5);
-    
-    fill(color(200, 200, 0));
-    text("H", width*0.72 +targets[1].width *1.5, 59);
-    
-    fill(color(0, 155, 0));
-    text("I", width/4 -targets[1].width *0.9, width*0.42 -targets[1].width *0.5);
-    
-    fill(color(0, 100, 0));
-    text("L", width*0.74 -targets[1].width *0.2, width*0.12+targets[1].width *0.3);
-    fill(color(0, 50, 230));
-    text("N", width*0.85 +targets[1].width*1.8, width*0.12+targets[1].width *0.3);
-    fill(color(90, 90, 230));
-    text("O", width*0.69+targets[1].width*2.78, width*0.2-targets[1].width*0.45);
-    
-    fill(color(126, 90, 155));
-    text("R", width*0.47+targets[1].width*2.9, width*0.271-targets[1].width*0.5);
-      
-    fill(color(238, 130, 238));
-    text("U", width*0.44+targets[1].width*3.3, width*0.42 -targets[1].width *0.5);
-    
-    fill(color(150, 120, 210));
-    text("Y", width*0.9+ targets[1].width*0.8, width*0.46 -targets[1].width *0.5);
+   
     // Draws the target label to be selected in the current trial. We include 
     // a black rectangle behind the trial label for optimal contrast in case 
     // you change the background colour of the sketch (DO NOT CHANGE THESE!)
@@ -265,9 +234,6 @@ function createTargets(target_size, horizontal_gap, vertical_gap)
     
     for (c = 0; c < GRID_COLUMNS; c++) {
       
-      let target_x = (h_margin + target_size) * c + target_size/2; // give it some margin from the left border
-      let target_y = (v_margin + target_size) * r + target_size/2;
-      
       // Find the appropriate label and ID for this target
       let legendas_index = c + GRID_COLUMNS * r;
       let target_id = legendas.getNum(legendas_index, 0);  
@@ -287,9 +253,9 @@ function createTargets(target_size, horizontal_gap, vertical_gap)
               for ( c = 0; c < 9; c++) {
               
               //a
-                let target_x = (h_margin + target_size*1.3) * c + target_size/4; 
+                let target_x = (h_margin + target_size*1.3) * c ; 
                  
-                let target_y = (v_margin + target_size) * r + target_size;
+                let target_y = (v_margin + target_size) * r + target_size/2;
                 
                 
                 if (i <= 26){XsYs.push({x : target_x, y : target_y});
@@ -302,23 +268,23 @@ function createTargets(target_size, horizontal_gap, vertical_gap)
               for (c = 0; c < 6; c++) {
               
               //e
-                let target_x = (h_margin + target_size*1.3) * c + target_size/4; 
+                let target_x = (h_margin + target_size*1.3) * c ; 
                  
-                let target_y = (v_margin + target_size) * r + width*0.271;
+                let target_y = (v_margin + target_size) * r + width*0.220;
                 
                 if (i <= 37){XsYs.push({x : target_x, y : target_y});
                 i++;}
               
               }
             }
-                  for (r = 0; r < 1; r++) {
+            for (r = 0; r < 1; r++) {
 
-                    for (c = 0; c < 4; c++) {
+                for (c = 0; c < 4; c++) {
 
               //h
-                      let target_x = (h_margin + target_size*1.3) * c + width*0.72; 
+                      let target_x = (h_margin + target_size*1.3) * c +  width*0.747; 
 
-                      let target_y = (v_margin + target_size) * r + target_size;
+                      let target_y = (v_margin + target_size) * r + target_size/2;
                       
                       if (i <= 40){XsYs.push({x : target_x, y : target_y});
                 i++;}
@@ -330,9 +296,9 @@ function createTargets(target_size, horizontal_gap, vertical_gap)
                     for (c = 0; c < 5; c++) {
 
             //i
-                      let target_x = (h_margin + target_size*1.3) * c + target_size/4; 
+                      let target_x = (h_margin + target_size*1.3) * c ; 
 
-                      let target_y = (v_margin + target_size) * r + width*0.42;
+                      let target_y = (v_margin + target_size) * r + width*0.36;
                       
                       if (i <= 49){XsYs.push({x : target_x, y : target_y});
                       i++;}
@@ -341,10 +307,10 @@ function createTargets(target_size, horizontal_gap, vertical_gap)
             }
           for ( r = 0; r < 1; r++) {
 
-                    for (c = 0; c < 5; c++) {
+                    for (c = 0; c < 1; c++) {
 
               //l
-                      let target_x = (h_margin + target_size*1.3) * c +  width*0.74; 
+                      let target_x = (h_margin + target_size*1.3) * c +  width*0.747; 
 
                       let target_y = (v_margin + target_size) * r + width*0.12;
                       
@@ -355,10 +321,10 @@ function createTargets(target_size, horizontal_gap, vertical_gap)
             } 
       for ( r = 0; r < 1; r++) {
 
-                    for ( c = 0; c < 5; c++) {
+                    for ( c = 0; c < 1; c++) {
             //n
 
-                      let target_x = (h_margin + target_size*1.3) * c + width*0.85; 
+                      let target_x = (h_margin + target_size*1.3) * c +  width*0.83; 
 
                       let target_y = (v_margin + target_size) * r + width*0.12;
                       
@@ -367,28 +333,28 @@ function createTargets(target_size, horizontal_gap, vertical_gap)
               
               }
             }
-    for ( r = 0; r < 1; r++) {
+    for ( r = 0; r < 2; r++) {
 
-                    for ( c = 0; c < 7; c++) {
+          for ( c = 0; c < 2; c++) {
 
               //o
-                      let target_x = (h_margin + target_size*1.3) * c + width*0.69; 
+                      let target_x = (h_margin + target_size*1.3) * c + width*0.35  ; 
 
-                      let target_y = (v_margin + target_size) * r + width*0.2;
+                      let target_y = (v_margin + target_size) * r + width*0.425  ;
                       
                       if (i <= 55){XsYs.push({x : target_x, y : target_y});
                 i++;}
               
               }
             } 
-            for ( r = 0; r < 2; r++) {
+            for ( r = 0; r < 3; r++) {
 
-                    for ( c = 0; c < 7; c++) {
+                    for ( c = 0; c < 5; c++) {
 
                 //r
-                      let target_x = (h_margin + target_size*1.3) * c + width*0.47; 
+                      let target_x = (h_margin + target_size*1.3) * c + width*0.55; 
 
-                      let target_y = (v_margin + target_size) * r + width*0.271;
+                      let target_y =(v_margin + target_size) * r + width*0.220;
                       
                       if (i <= 68){XsYs.push({x : target_x, y : target_y});
                 i++;}
@@ -400,9 +366,9 @@ function createTargets(target_size, horizontal_gap, vertical_gap)
                     for ( c = 0; c < 5; c++) {
               //u
 
-                      let target_x = (h_margin + target_size*1.3) * c + width*0.44; 
+                      let target_x = (h_margin + target_size*1.3) * c + width*0.55 ; 
 
-                      let target_y = (v_margin + target_size) * r + width*0.42;
+                      let target_y = (v_margin + target_size) * r + width*0.425 ;
                       
                       if (i <= 78){XsYs.push({x : target_x, y : target_y});
                 i++;}
@@ -410,17 +376,12 @@ function createTargets(target_size, horizontal_gap, vertical_gap)
               }
             } 
                   //y
-                      let target_x = (h_margin + target_size*1.3) * 0 + width*0.9; 
+                      let target_x = width*0.91; 
 
-                      let target_y = (v_margin + target_size) * 0 + width*0.46;
+                      let target_y = width*0.12;
                       
                       XsYs.push({x : target_x, y : target_y});
-             
-     
-  
-
-
-  //  */
+ 
   // Sort the array of labels and ids by alphabetical order of label
   labelsIds.sort((a, b) => a.label.localeCompare(b.label));
   
@@ -449,7 +410,7 @@ function windowResized()
     // Below we find out out white space we can have between 2 cm targets
     let screen_width   = display.width * 2.54;             // screen width
     let screen_height  = display.height * 2.54;            // screen height
-    let target_size    =  2;                                // sets the target size (will be converted to cm when passed to createTargets)
+    let target_size    = 1.8;                                // sets the target size (will be converted to cm when passed to createTargets)
     let horizontal_gap = screen_width - target_size * GRID_COLUMNS;// empty space in cm across the x-axis (based on 10 targets per row)
     let vertical_gap   = screen_height - target_size * GRID_ROWS;  // empty space in cm across the y-axis (based on 8 targets per column)
 
